@@ -1,0 +1,11 @@
+[main]
+HOST.IP ansible_connection=ssh ansible_ssh_user=root
+
+[main:vars]
+do_token=DIGITAL_OCEAN_ACCESS_TOKEN
+
+website_buildkite_token=BUILDKITE_ACCESS_TOKEN
+website_github_webhook_secret=GITHUB_WEBHOOK_SECRET
+
+website_db_name=oparl-website
+demo_db_name=oparl-demo

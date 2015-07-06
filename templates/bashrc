@@ -1,0 +1,4 @@
+alias ..='cd ..'
+alias ll='ls -l'
+
+set -o vi
