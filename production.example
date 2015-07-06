@@ -8,4 +8,6 @@ website_buildkite_token=BUILDKITE_ACCESS_TOKEN
 website_github_webhook_secret=GITHUB_WEBHOOK_SECRET
 
 website_db_name=oparl-website
+website_hostname=WEBSITE_HOSTNAME
+
 demo_db_name=oparl-demo

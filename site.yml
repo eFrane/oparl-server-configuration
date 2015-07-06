@@ -101,4 +101,4 @@
           creates: /home/oparl/demoserver
 
       - name: Demoserver (Hosts file)
-        lineinfile: dest=/etc/hosts line='46.101.250.185 demoserver.oparl.meanderingsoul.com'
+        lineinfile: dest=/etc/hosts line="{{ ansible_default_ipv4.address }} {{ website_hostname }}"
