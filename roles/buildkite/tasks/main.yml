@@ -1,0 +1,19 @@
+- name: Buildkite Agent (Get sources.list)
+  shell: echo deb https://apt.buildkite.com/buildkite-agent unstable main > /etc/apt/sources.list.d/buildkite-agent.list
+  args:
+    creates: /etc/apt/sources.list.d/buildkite-agent.list
+
+- name: Buildkite Agent (Add apt key)
+  apt_key: keyserver=hkp://keyserver.ubuntu.com:80 id=32A37959C2FA5C3C99EFBC32A79206696452D198
+
+- name: Buildkite Agent (Install)
+  apt: pkg=buildkite-agent state=latest update_cache=yes
+
+- name: Buildkite Agent (Set Token)
+  lineinfile: dest=/etc/buildkite-agent/buildkite-agent.cfg regexp='token=' line='token="{{agent_buildkite_token}}"'
+
+- name: Buildkite Agent (Set Metadata)
+  lineinfile: dest=/etc/buildkite-agent/buildkite-agent.cfg line="meta-data=oparl-buildserver=true"
+
+- name: Buildkite Agent (Run Service)
+  service: name=buildkite-agent state=restarted

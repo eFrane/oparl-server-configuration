@@ -1,0 +1,27 @@
+---
+    - name: Core dependencies
+      apt: pkg={{item}} state=latest update_cache=yes
+      with_items:
+        - language-pack-de
+        - mosh
+        - vim
+        - nginx
+        - mysql-server
+        - redis-server
+        - supervisor
+        - anacron
+        - logrotate
+        - ruby
+        - python
+        - zip
+        - unzip
+        - git-core
+        - texlive-base
+        - node
+        - npm
+
+    - name: Copy .bashrc
+      copy: src=bashrc dest=/root/.bashrc force=yes
+
+    - name: Copy .vimrc
+      copy: src=vimrc dest=/root/.vimrc
