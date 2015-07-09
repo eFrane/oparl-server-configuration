@@ -23,3 +23,6 @@
         website_name: spec,
         website_hostname: "{{ sites.spec.hostname }}",
       }
+  handlers:
+    - name: reload nginx
+      service: name=nginx state=reloaded
