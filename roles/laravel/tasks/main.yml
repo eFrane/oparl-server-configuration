@@ -11,6 +11,9 @@
 - name: PHP (Configure FPM Pool)
   lineinfile: dest=/etc/php5/fpm/pool.d/www.conf line="user = oparl" regexp="user = "
 
+- name: PHP (Disable OPCache for CLI)
+  lineinfile: dest=/etc/php5/cli/php.ini line="opcache.enable=0" regexp=";opcache\.enable="
+
 - name: Composer (Install)
   shell: curl -sS https://getcomposer.org/installer | php -- --filename=composer --install-dir=/usr/local/bin
   args:
