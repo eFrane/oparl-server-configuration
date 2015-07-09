@@ -13,6 +13,7 @@
     - ruby
     - python
     - python-pip
+    - python-mysql
     - zip
     - unzip
     - git-core
