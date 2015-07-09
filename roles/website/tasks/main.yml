@@ -14,12 +14,13 @@
   become_user: oparl
 
 - name: "{{ website_name}} (Create Database User)"
-  mysql_user: name={{ sites[website_name].db.username }} password={{ sites[website_name].db.password }}
+  mysql_user: name={{ sites[website_name].db.username }} password={{ sites[website_name].db.password }} state=present
 
 - name: "{{ website_name}} (Create Database)"
   mysql_db: name={{ sites[website_name].db.name }} state=present
 
-# TODO: set database privileges for user
+- name: "{{ website_name }} (Setup db user privileges)"
+  mysql_user: name={{ sites[website_name].db.username }} priv={{ sites[website_name].db.name }}.*:ALL state=present
 
 - name: "{{ website_name }} (Add to hosts file)"
   lineinfile: dest=/etc/hosts line="{{ ansible_default_ipv4.address }} {{ website_hostname }}"
@@ -33,13 +34,19 @@
     dest=/etc/nginx/sites-enabled/oparl-{{ website_name }}
     state=link
 
-- name: "{{ website_name}} (Copy logrotate config)"
+- name: "{{ website_name }} (Copy logrotate config)"
   template: src=logrotate.conf dest=/etc/logrotate.d/oparl-{{ website_name }}.conf
 
-- name: "{{ website_name}} (Copy supervisor config)"
+- name: "{{ website_name }} (Copy supervisor config)"
   template: src=supervisor.conf dest=/etc/supervisor/conf.d/oparl-{{ website_name }}.conf
 
-- name: "{{ website_name}} (Copy .env)"
+- name: "{{ website_name }} (Copy .env)"
   template: src={{ website_name}}.env dest=/home/oparl/{{ website_name}}/.env
+  become: yes
+  become_user: oparl
+
+- name: "{{ website_name }} (Setup App Key)"
+  command: php artisan key:generate
+  once: yes
   become: yes
   become_user: oparl
