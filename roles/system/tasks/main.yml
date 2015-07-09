@@ -12,6 +12,7 @@
     - logrotate
     - ruby
     - python
+    - python-pip
     - zip
     - unzip
     - git-core
