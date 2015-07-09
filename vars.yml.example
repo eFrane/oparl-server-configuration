@@ -6,11 +6,17 @@ sites:
   spec:
     hostname:
     git: https://github.com/OParl/spec-website.git
-    db: oparl
+    db:
+      name: oparl
+      username: 
+      password:
     env:
       github_secret: # GitHub WebHook Secret
 
   demoserver:
     hostname:
     git: https://github.com/OParl/php-server.git
-    db: oparl_api_demo
+    db:
+      name: oparl_api_demo
+      username:
+      password:
