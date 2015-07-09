@@ -13,6 +13,14 @@
   become: yes
   become_user: oparl
 
+- name: "{{ website_name}} (Create Database User)"
+  mysql_user: name={{ sites[website_name].db.username }} password={{ sites[website_name].db.password }}
+
+- name: "{{ website_name}} (Create Database)"
+  mysql_db: name={{ sites[website_name].db.name }} state=present user=root
+
+# TODO: set database privileges for user
+
 - name: "{{ website_name }} (Add to hosts file)"
   lineinfile: dest=/etc/hosts line="{{ ansible_default_ipv4.address }} {{ website_hostname }}"
 
@@ -30,3 +38,8 @@
 
 - name: "{{ website_name}} (Copy supervisor config)"
   template: src=supervisor.conf dest=/etc/supervisor/conf.d/oparl-{{ website_name }}.conf
+
+- name: "{{ website_name}} (Copy .env)"
+  template: src={{ website_name}}.env dest=/home/oparl/{{ website_name}}/.env
+  become: yes
+  become_user: oparl
