@@ -1,0 +1,32 @@
+- name: "{{ website_name }} (Initial Checkout)"
+  shell: git clone {{ website_git_url }} {{ website_name }} && rm -rf /home/oparl/{{ website_name }}/.git
+  become: yes
+  become_user: oparl
+  args:
+    creates: /home/oparl/{{ website_name }}
+
+- name: "{{ website_name }} (Init composer)"
+  command: composer install --no-dev
+  args:
+    chdir: /home/oparl/{{ website_name }}
+    creates: /home/oparl/{{ website_name }}/vendor
+  become: yes
+  become_user: oparl
+
+- name: "{{ website_name }} (Add to hosts file)"
+  lineinfile: dest=/etc/hosts line="{{ ansible_default_ipv4.address }} {{ website_hostname }}"
+
+- name: "{{ website_name }} (Copy nginx config)"
+  template: src=nginx.conf dest=/etc/nginx/sites-available/oparl-{{ website_name }}
+
+- name: "{{ website_name }} (Link nginx config to enabled sites)"
+  file:
+    src=/etc/nginx/sites-available/oparl-{{ website_name }}
+    dest=/etc/nginx/sites-enabled/oparl-{{ website_name }}
+    state=link
+
+- name: "{{ website_name}} (Copy logrotate config)"
+  template: src=logrotate.conf dest=/etc/logrotate.d/oparl-{{ website_name }}.conf
+
+- name: "{{ website_name}} (Copy supervisor config)"
+  template: src=supervisor.conf dest=/etc/supervisor/conf.d/oparl-{{ website_name }}.conf

@@ -10,7 +10,7 @@
   apt: pkg=buildkite-agent state=latest update_cache=yes
 
 - name: Buildkite Agent (Set Token)
-  lineinfile: dest=/etc/buildkite-agent/buildkite-agent.cfg regexp='token=' line='token="{{agent_buildkite_token}}"'
+  lineinfile: dest=/etc/buildkite-agent/buildkite-agent.cfg regexp='token=' line='token="{{env.buildkite_token}}"'
 
 - name: Buildkite Agent (Set Metadata)
   lineinfile: dest=/etc/buildkite-agent/buildkite-agent.cfg line="meta-data=oparl-buildserver=true"
