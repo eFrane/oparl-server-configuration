@@ -24,7 +24,13 @@
   copy: src=bashrc dest=/root/.bashrc force=yes
 
 - name: Copy .vimrc
-  copy: src=vimrc dest=/root/.vimrc
+  copy: src=vimrc dest=/root/.vimrc force=yes
+
+- name: Copy .bashrc to user skeleton
+  copy: src=bashrc dest=/etc/skel/.bashrc force=yes
+
+- name: Copy .vimrc to user skeleton
+  copy: src=vimrc dest=/etc/skel/.vimrc force=yes
 
 - name: Add OParl User
   user: name=oparl groups=www-data
