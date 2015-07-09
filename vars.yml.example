@@ -1,0 +1,16 @@
+env:
+  digitalocean_token: # Digital Ocean Access Token (Full Access)
+  buildkite_token: # Buildkite Access Token (Full Access)
+
+sites:
+  spec:
+    hostname:
+    git: https://github.com/OParl/spec-website.git
+    db: oparl
+    env:
+      github_secret: # GitHub WebHook Secret
+
+  demoserver:
+    hostname:
+    git: https://github.com/OParl/php-server.git
+    db: oparl_api_demo
