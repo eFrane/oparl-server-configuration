@@ -17,7 +17,7 @@
   mysql_user: name={{ sites[website_name].db.username }} password={{ sites[website_name].db.password }}
 
 - name: "{{ website_name}} (Create Database)"
-  mysql_db: name={{ sites[website_name].db.name }} state=present user=root
+  mysql_db: name={{ sites[website_name].db.name }} state=present
 
 # TODO: set database privileges for user
 
