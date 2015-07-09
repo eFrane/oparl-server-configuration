@@ -30,3 +30,6 @@
 
 - name: Sass
   gem: name=sass state=latest
+
+- name: Nginx (Disable default website)
+  file: path=/etc/nginx/sites-enabled/default state=absent
