@@ -33,6 +33,7 @@
     src=/etc/nginx/sites-available/oparl-{{ website_name }}
     dest=/etc/nginx/sites-enabled/oparl-{{ website_name }}
     state=link
+  notify: reload nginx
 
 - name: "{{ website_name }} (Copy logrotate config)"
   template: src=logrotate.conf dest=/etc/logrotate.d/oparl-{{ website_name }}.conf
