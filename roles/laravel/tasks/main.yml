@@ -13,8 +13,11 @@
   with_items:
     - mcrypt
     - json
+  notify: restart php-fpm
+
 - name: PHP (Configure FPM Pool)
   lineinfile: dest=/etc/php5/fpm/pool.d/www.conf line="user = oparl" regexp="user = "
+  notify: restart php-fpm
 
 - name: PHP (Disable OPCache for CLI)
   lineinfile: dest=/etc/php5/cli/php.ini line="opcache.enable=0" regexp=";opcache\.enable="
