@@ -8,6 +8,11 @@
     - php5-intl
     - php5-json
 
+- name: PHP (Enable Modules)
+  command: php5enmod {{ item }}
+  with_items:
+    - mcrypt
+    - json
 - name: PHP (Configure FPM Pool)
   lineinfile: dest=/etc/php5/fpm/pool.d/www.conf line="user = oparl" regexp="user = "
 
