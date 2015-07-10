@@ -8,10 +8,11 @@ sites:
     git: https://github.com/OParl/spec-website.git
     db:
       name: oparl
-      username: 
+      username:
       password:
     env:
       github_secret: # GitHub WebHook Secret
+      app_key: # Application Encryption Key
 
   demoserver:
     hostname:
@@ -20,3 +21,5 @@ sites:
       name: oparl_api_demo
       username:
       password:
+    env:
+      app_key: # Application Encryption Key
