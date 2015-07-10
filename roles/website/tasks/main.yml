@@ -46,8 +46,3 @@
   become: yes
   become_user: oparl
 
-- name: "{{ website_name }} (Setup App Key)"
-  command: php artisan key:generate
-  once: yes
-  become: yes
-  become_user: oparl
