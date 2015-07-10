@@ -46,3 +46,5 @@
   become: yes
   become_user: oparl
 
+- name: "{{ website_name }} chmod storage 775"
+  file: path=/home/oparl/{{ website_name }} mode=777 recurse=yes
