@@ -1,5 +1,5 @@
 - name: Buildkite Agent (Get sources.list)
-  shell: echo deb https://apt.buildkite.com/buildkite-agent unstable main > /etc/apt/sources.list.d/buildkite-agent.list
+  shell: echo deb https://apt.buildkite.com/buildkite-agent stable main > /etc/apt/sources.list.d/buildkite-agent.list
   args:
     creates: /etc/apt/sources.list.d/buildkite-agent.list
 
