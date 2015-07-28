@@ -3,6 +3,8 @@
   with_items:
     - php5-cli
     - php5-fpm
+    - php5-mysql
+    - php5-mysqli
     - php5-mcrypt
     - php5-curl
     - php5-intl
