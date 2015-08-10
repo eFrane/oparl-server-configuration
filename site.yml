@@ -2,14 +2,14 @@
 - hosts: all
   vars_files:
     - vars.yml
-    
+
   roles:
     - system
     - {
         role: kamaln7.swapfile,
         swapfile_size: 1GiB
       }
-    - buildkite
+#    - buildkite (this may be reactivated later)
     - pandoc
     - laravel
     - {
