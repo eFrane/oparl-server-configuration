@@ -20,6 +20,8 @@
     - texlive-base
     - node
     - npm
+    - unattended-upgrades
+    - update-notifier-common
 
 - name: Copy .bashrc
   copy: src=bashrc dest=/root/.bashrc force=yes
