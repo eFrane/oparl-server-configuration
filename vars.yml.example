@@ -11,8 +11,18 @@ sites:
       username:
       password:
     env:
-      github_secret: # GitHub WebHook Secret
-      app_key: # Application Encryption Key
+      app_key: # App Key
+
+      buildkite_project: # Buildkite project for specification updates
+      buildkite_deploy_key: # Deploy key for specification updates
+
+      github_client_id: # GitHub client id
+      github_client_secret: GitHub client secret
+      github_webhook_secret: GitHub spec update webhook secret
+      
+      pusher_key: # Pusher key (for requested builds)
+      pusher_secret: # Pusher secret
+      pusher_app_id: # Pusher app id
 
   demoserver:
     hostname:

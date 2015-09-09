@@ -10,3 +10,9 @@
   command: rm /root/pandoc.deb
   args:
     removes: /root/pandoc.deb
+
+- name: TeX and Ghostscript
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - ghostscript
+    - texlive-base

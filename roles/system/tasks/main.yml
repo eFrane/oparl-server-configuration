@@ -4,6 +4,7 @@
     - language-pack-de
     - mosh
     - vim
+    - beanstalkd
     - nginx
     - mysql-server
     - redis-server
@@ -17,7 +18,6 @@
     - zip
     - unzip
     - git-core
-    - texlive-base
     - node
     - npm
     - unattended-upgrades

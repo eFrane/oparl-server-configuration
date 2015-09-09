@@ -13,6 +13,13 @@
   become: yes
   become_user: oparl
 
+- name: "{{ website_name }} (artisan optimize)"
+  command: php artisan optimize
+  args:
+    chdir: /home/oparl/{{ website_name }}
+  become: yes
+  become_user: oparl
+
 - name: "{{ website_name}} (Create Database User)"
   mysql_user: name={{ sites[website_name].db.username }} password={{ sites[website_name].db.password }} state=present
 
@@ -46,5 +53,20 @@
   become: yes
   become_user: oparl
 
-- name: "{{ website_name }} chmod storage 775"
+- name: "{{ website_name }} (Configure the storage directory)"
   file: path=/home/oparl/{{ website_name }} mode=777 recurse=yes
+
+- name: "{{ website_name }} (Run migrations)"
+  command: php artisan migrate --force
+  args:
+    chdir: /home/oparl/{{ website_name }}
+  become: yes
+  become_user: oparl
+
+#- name: "{{ website_name }} (Seed the database)"
+#  shell: php artisan db:seed --force && echo {{ ansible_date_time.iso8601 }} > .database-seeded
+#  args:
+#    chdir: /home/oparl/{{ website_name }}
+#    creates: /home/oparl/{{ website_name }}/.database-seeded
+#  become: yes
+#  become_user: oparl
